@@ -17,7 +17,7 @@ func RegisterJobs() {
 	c := cron.New()
 
 	// Add a sample job
-	_, err := c.AddFunc("@every 1m", func() { sendNotification() })
+	_, err := c.AddFunc("@every 5s", func() { sendNotification() })
 	if err != nil {
 		fmt.Println("Error adding cron job:", err)
 		return
