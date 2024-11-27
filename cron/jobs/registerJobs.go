@@ -107,26 +107,43 @@ func updateNotificationToSent(notificationID int) error {
 }
 
 func SendEmail(to string, subject string, body string) error {
-	dialer := ConfigSMTP()
-	if dialer == nil {
-		return errors.New("failed to configure SMTP dialer")
-	}
-	m := gomail.NewMessage()
-	m.SetHeader("From", dialer.Username)
-	m.SetHeader("To", to)
-	m.SetHeader("Subject", subject)
-	m.SetBody("text/html", body)
+	for i := 0; i < len(smtpConfigs); i++ {
+		dialer := ConfigSMTP()
+		if dialer == nil {
+			return errors.New("failed to configure SMTP dialer")
+		}
+		m := gomail.NewMessage()
+		m.SetHeader("From", dialer.Username)
+		m.SetHeader("To", to)
+		m.SetHeader("Subject", subject)
+		m.SetBody("text/html", body)
 
-	if err := dialer.DialAndSend(m); err != nil {
-		return err
+		if err := dialer.DialAndSend(m); err != nil {
+			fmt.Println("Error sending email with current SMTP config:", err)
+			currentSMTPIndex = (currentSMTPIndex + 1) % len(smtpConfigs)
+			continue
+		}
+
+		return nil
 	}
 
-	return nil
+	return errors.New("failed to send email with all SMTP configurations")
 }
+
 func ConfigSMTP() *gomail.Dialer {
-	SmtpHost := "smtp.gmail.com"
-	SmtpPort := 587
-	SmtpEmail := "timewise.space@gmail.com"
-	SmtpPassword := "dczt wlvd eisn cixf"
-	return gomail.NewDialer(SmtpHost, SmtpPort, SmtpEmail, SmtpPassword)
+	config := smtpConfigs[currentSMTPIndex]
+	return gomail.NewDialer(config.Host, config.Port, config.Email, config.Password)
+}
+
+var currentSMTPIndex = 0
+
+var smtpConfigs = []struct {
+	Host     string
+	Port     int
+	Email    string
+	Password string
+}{
+	{"smtp.gmail.com", 587, "timewise.space@gmail.com", "dczt wlvd eisn cixf"}, // vietbl
+	{"smtp.gmail.com", 587, "timewise.space@yahoo.com", "cddn ujge aqlm xmjb"}, // kid.from.past
+	{"smtp.gmail.com", 587, "timewise.space@yahoo.com", "dgbx xyvw ciqg txbl"}, // khanhhn.hoang
 }
