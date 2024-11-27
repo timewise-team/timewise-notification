@@ -119,7 +119,7 @@ func SendEmail(to string, subject string, body string) error {
 		m.SetBody("text/html", body)
 
 		if err := dialer.DialAndSend(m); err != nil {
-			fmt.Println("Error sending email with current SMTP config:", err)
+			fmt.Println("Error sending email with current SMTP", dialer.Username, "config:", err.Error(), "\n")
 			currentSMTPIndex = (currentSMTPIndex + 1) % len(smtpConfigs)
 			continue
 		}
@@ -143,7 +143,7 @@ var smtpConfigs = []struct {
 	Email    string
 	Password string
 }{
-	{"smtp.gmail.com", 587, "timewise.space@gmail.com", "dczt wlvd eisn cixf"}, // vietbl
-	{"smtp.gmail.com", 587, "timewise.space@yahoo.com", "cddn ujge aqlm xmjb"}, // kid.from.past
-	{"smtp.gmail.com", 587, "timewise.space@yahoo.com", "dgbx xyvw ciqg txbl"}, // khanhhn.hoang
+	{"smtp.gmail.com", 587, "timewise.space@gmail.com", "dczt wlvd eisn cixf"},   // vietbl
+	{"smtp.gmail.com", 587, "khanhhnhe170088@fpt.edu.vn", "cddn ujge aqlm xmjb"}, // khanhhnhe170088
+	{"smtp.gmail.com", 587, "khanhhn.hoang@gmail.com", "dgbx xyvw ciqg txbl"},    // khanhhn.hoang
 }
