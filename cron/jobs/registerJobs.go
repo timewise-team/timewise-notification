@@ -143,7 +143,11 @@ var smtpConfigs = []struct {
 	Email    string
 	Password string
 }{
-	{"smtp.gmail.com", 587, "timewise.space@gmail.com", "dczt wlvd eisn cixf"},   // vietbl
-	{"smtp.gmail.com", 587, "khanhhnhe170088@fpt.edu.vn", "cddn ujge aqlm xmjb"}, // khanhhnhe170088
-	{"smtp.gmail.com", 587, "khanhhn.hoang@gmail.com", "dgbx xyvw ciqg txbl"},    // khanhhn.hoang
+	{"smtp.gmail.com", 587, "timewise.space@gmail.com", "dczt wlvd eisn cixf"},
+	{"smtp.gmail.com", 587, "khanhhnhe170088@fpt.edu.vn", "cddn ujge aqlm xmjb"},
+	{"smtp.gmail.com", 587, "khanhhn.hoang@gmail.com", "dgbx xyvw ciqg txbl"},
+	{"smtp.gmail.com", 587, "khanhhnhe170088@fpt.edu.vn", "iaqw vmoj fxgb zzne"},
+	{"smtp.gmail.com", 587, "thuandqhe170881@fpt.edu.vn", "whzq ivlb hevo jhdi"},
+	{"smtp.gmail.com", 587, "builanviet@gmail.com", "lowo laid zgda chnc"},
+	{"smtp.gmail.com", 587, "ngkkhanh006@gmail.com", "soet mdxg doio fmrt"},
 }
