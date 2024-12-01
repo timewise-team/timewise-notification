@@ -23,6 +23,15 @@ func RegisterJobs() {
 		return
 	}
 
+	_, err = c.AddFunc("@every 10m", func() {
+		clearExpiredLinkEmailRequests()
+	})
+
+	if err != nil {
+		fmt.Println("Error adding cron job:", err)
+		return
+	}
+
 	c.Start()
 	fmt.Println("Cron jobs started")
 }
@@ -102,6 +111,26 @@ func updateNotificationToSent(notificationID int) error {
 	if resp.StatusCode != http.StatusOK {
 		return fmt.Errorf("failed to update notification: status code %d", resp.StatusCode)
 	}
+
+	return nil
+}
+
+func clearExpiredLinkEmailRequests() {
+	fmt.Println("Starting cron job: clearExpiredLinkEmailRequests at", time.Now())
+
+	err := DeleteLinkEmailRequest()
+	if err != nil {
+		fmt.Println("Error getting expired link email requests:", err)
+		return
+	}
+}
+
+func DeleteLinkEmailRequest() error {
+	resp, err := http.Get("https://dms.timewise.space/dbms/v1/user_email/clear-expired")
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
 
 	return nil
 }
