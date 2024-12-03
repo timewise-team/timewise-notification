@@ -483,4 +483,5 @@ var smtpConfigs = []struct {
 	{"smtp.gmail.com", 587, "thuandqhe170881@fpt.edu.vn", "whzq ivlb hevo jhdi"},
 	{"smtp.gmail.com", 587, "builanviet@gmail.com", "lowo laid zgda chnc"},
 	{"smtp.gmail.com", 587, "ngkkhanh006@gmail.com", "soet mdxg doio fmrt"},
+	{"smtp.gmail.com", 587, "khanhhn@metric.vn", "pjax xcvp ohmf prgx"},
 }
