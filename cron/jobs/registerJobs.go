@@ -89,12 +89,12 @@ func createMessage(reminder models.TwReminder) string {
 	// Kiểm tra xem StartTime và EndTime có nil không trước khi format
 	var startTime, endTime string
 	if reminder.Schedule.StartTime != nil {
-		startTime = reminder.Schedule.StartTime.Format("02/01/2006 15:04")
+		startTime = reminder.Schedule.StartTime.Add(7 * time.Hour).Format("02/01/2006 15:04")
 	} else {
 		startTime = "N/A" // Hoặc có thể để là một giá trị mặc định khác
 	}
 	if reminder.Schedule.EndTime != nil {
-		endTime = reminder.Schedule.EndTime.Format("02/01/2006 15:04")
+		endTime = reminder.Schedule.EndTime.Add(7 * time.Hour).Format("02/01/2006 15:04")
 	} else {
 		endTime = "N/A" // Hoặc có thể để là một giá trị mặc định khác
 	}
